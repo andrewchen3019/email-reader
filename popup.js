@@ -16,7 +16,7 @@ let currentUtter = null;
 function populateVoices() {
   const voices = synth.getVoices();
   voicesSelect.innerHTML = "";
-  // Prefer en-IN and names with India/Indian/Hindi
+  
   const preferred = voices.filter(v => (v.lang && v.lang.toLowerCase().startsWith('en-in')) || /india|indian|hindi/i.test(v.name));
   const others = voices.filter(v => !preferred.includes(v));
   const list = [...preferred, ...others];

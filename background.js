@@ -1,8 +1,8 @@
 // background.js (service worker)
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
-    id: "read-selection-indian",
-    title: "Read selection in Indian accent",
+    id: "read-selection",
+    title: "Read selection",
     contexts: ["selection"]
   });
 });
@@ -18,16 +18,16 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       // This runs in page context
       (function speakText(t) {
         if (!t || t.trim().length === 0) return;
-        // attempt to find an en-IN or India voice, otherwise fallback
+
         const synth = window.speechSynthesis;
         let voices = synth.getVoices();
         // A helper to pick voice
-        function pickIndianVoice() {
+        function pickVoice() {
           voices = synth.getVoices(); // refresh
           // prefer locale en-IN
           let found = voices.find(v => v.lang && v.lang.toLowerCase().startsWith("en-in"));
           if (found) return found;
-          // try names containing India/Indian/Hindi
+          
           found = voices.find(v => /india|indian|hindi/i.test(v.name));
           if (found) return found;
           // try any English voice
@@ -47,13 +47,13 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         }
 
         ensureVoicesLoaded(() => {
-          const voice = pickIndianVoice();
+          const voice = pickVoice();
           const utter = new SpeechSynthesisUtterance(t);
           if (voice) utter.voice = voice;
-          // If voice isn't explicitly Indian, tune pitch/rate for a pleasant, slightly slower delivery
+        
           utter.rate = 0.95;
           utter.pitch = 1.0;
-          // Some Indian accents sound clearer with slightly lower rate; user can tune in popup too
+          
           speechSynthesis.cancel();
           speechSynthesis.speak(utter);
         });

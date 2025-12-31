@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Read Selection (Indian Accent)",
+  "name": "Email Reader",
   "version": "1.0",
-  "description": "Read selected email/text using a voice biased toward an Indian English accent.",
+  "description": "Read selected email/text using a customizable voice",
   "permissions": [
     "contextMenus",
     "scripting",
@@ -19,7 +19,7 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Read in Indian Accent"
+    "default_title": "Email Reader"
   },
   "background": {
     "service_worker": "background.js"
