@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 320px;
+    padding: 10px;
+}
+label {
+    font-size: 12px;
+    display: block;
+    margin-top: 8px;
+}
+select,
+input[type="range"],
+textarea {
+    width: 100%;
+}
+textarea {
+    height: 90px;
+    margin-top: 6px;
+}
+button {
+    margin-top: 8px;
+    width: 49%;
+}
+.controls {
+    display: flex;
+    gap: 4px;
+}
+.small {
+    font-size: 12px;
+}
