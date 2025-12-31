@@ -142,15 +142,9 @@ readGmailBtn.addEventListener('click', async () => {
             if (sel && sel.length > 0) text = sel;
             }
         }else if(client == "outlook"){
-            console.log("i have an enourmous butt");
-       
             const body = document.querySelector("[data-test-id='mailMessageBodyContainer']");
-                 console.log(body);
             text += getTextFromNode(body);
         }
-        console.log(client);
-        
-
         return text;
       }
     });
