@@ -88,8 +88,11 @@ readSelectionBtn.addEventListener('click', async () => {
     alert('Could not get selection from page.');
   }
 });
-
 // Read open Gmail message (best-effort): inject content-script logic to extract message body
+
+
+
+
 readGmailBtn.addEventListener('click', async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab || !tab.id) return;
@@ -99,13 +102,26 @@ readGmailBtn.addEventListener('click', async () => {
       target: { tabId: tab.id },
       func: () => {
         // same logic as content-script.js but inline (returns extracted text)
+        function detectClient() {
+            const host = (location.hostname || "").toLowerCase();
+            const href = (location.href || "").toLowerCase();
+            if (host.includes("mail.google.com") || href.includes("mail.google.com") || href.includes("gmail.com")) return "gmail";
+            if (host.includes("outlook.live.com") || host.includes("outlook.office.com") || host.includes("outlook.office365.com") ||
+                href.includes("outlook.live.com") || href.includes("owa") || href.includes("office.com")) return "outlook";
+            if (document.querySelector("div.a3s, div.ii.gt, table.gs") ) return "gmail";
+            if (document.querySelector("[aria-label='Message content'], [aria-label='Message body'], .ReadingPaneContainer, .ms-Message") ) return "outlook";
+            return "unknown";
+        }
         function getTextFromNode(node) {
           if (!node) return "";
           const clone = node.cloneNode(true);
           clone.querySelectorAll("script, style, noscript").forEach(n => n.remove());
           return clone.innerText || clone.textContent || "";
         }
-        const selectors = [
+        const client = detectClient();
+        let text = "";
+        if(client == "gmail"){
+            const selectors = [
           "div.a3s",
           "div.ii.gt",
           "div[role='main'] div[jscontroller] .a3s",
@@ -113,18 +129,28 @@ readGmailBtn.addEventListener('click', async () => {
           "div.mail-body",
           "body"
         ];
-        let text = "";
+
         for (const sel of selectors) {
           const el = document.querySelector(sel);
           if (el) {
             text = getTextFromNode(el).trim();
-            if (text.length > 50) break;
+           // if (text.length > 50) break;
           }
         }
-        if ((!text || text.length < 10) && window.getSelection) {
+                if ((!text || text.length < 10) && window.getSelection) {
           const sel = window.getSelection().toString().trim();
           if (sel && sel.length > 0) text = sel;
         }
+        }else if(client == "outlook"){
+            console.log("i have an enourmous butt");
+       
+            const body = document.querySelector("[data-test-id='mailMessageBodyContainer']");
+                 console.log(body);
+            text += getTextFromNode(body);
+        }
+        console.log(client);
+        
+
         return text;
       }
     });
