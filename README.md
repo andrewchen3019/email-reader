@@ -1,6 +1,6 @@
 # Email Reader
 ## How does it work?
-The email reader uses Tex-To-Speech Synthesis to read your emails.
+The email reader uses Text-To-Speech Synthesis to read your emails.
 It scans your email to see what type (gmail or outlook) and reads your current email. 
 ## How do I use it?
 You can just click **"Read Open Gmail Message"** and it will read your current open email. 
