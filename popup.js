@@ -122,25 +122,25 @@ readGmailBtn.addEventListener('click', async () => {
         let text = "";
         if(client == "gmail"){
             const selectors = [
-          "div.a3s",
-          "div.ii.gt",
-          "div[role='main'] div[jscontroller] .a3s",
-          "article",
-          "div.mail-body",
-          "body"
-        ];
+            "div.a3s",
+            "div.ii.gt",
+            "div[role='main'] div[jscontroller] .a3s",
+            "article",
+            "div.mail-body",
+            "body"
+            ];
 
-        for (const sel of selectors) {
-          const el = document.querySelector(sel);
-          if (el) {
-            text = getTextFromNode(el).trim();
-           // if (text.length > 50) break;
-          }
-        }
-                if ((!text || text.length < 10) && window.getSelection) {
-          const sel = window.getSelection().toString().trim();
-          if (sel && sel.length > 0) text = sel;
-        }
+            for (const sel of selectors) {
+            const el = document.querySelector(sel);
+            if (el) {
+                text = getTextFromNode(el).trim();
+                if (text.length > 50) break;
+            }
+            }
+            if ((!text || text.length < 10) && window.getSelection) {
+            const sel = window.getSelection().toString().trim();
+            if (sel && sel.length > 0) text = sel;
+            }
         }else if(client == "outlook"){
             console.log("i have an enourmous butt");
        
