@@ -1,30 +1,85 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    width: 320px;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    width: 400px;
     padding: 10px;
 }
 label {
-    font-size: 12px;
+    font-size: 1.1rem;
     display: block;
-    margin-top: 8px;
+    margin: 8px;
+    margin-bottom: 0;
 }
 select,
 input[type="range"],
 textarea {
     width: 100%;
 }
+select {
+    padding: 8px;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: black;
+    box-shadow: 3px 3px 3px lightslategrey;
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.2s background-color;
+}
+select:hover {
+    background-color: lightgray;
+}
+.sliders {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+}
+.sliders::-webkit-slider-runnable-track {
+    background: whitesmoke;
+    border: 2px solid black;
+    padding: 3px;
+    border-radius: 12px;
+}
+.sliders::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background: gainsboro;
+    -webkit-appearance: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s background-color;
+}
+.sliders::-webkit-slider-thumb:hover {
+    background: grey;
+}
 textarea {
     height: 90px;
-    margin-top: 6px;
+    margin: 6px;
+    width: 90%;
+    border-radius: 5px;
+    padding: 10px;
+    outline: 0;
+    border-width: 2px;
+    border-color: darkslategrey;
+    box-shadow: 3px 3px 3px lightslategrey;
 }
 button {
     margin-top: 8px;
+    background-color: transparent;
+    border-radius: 4px;
+    outline: 0;
+    border-width: 2px;
+    border-color: black;
+    padding: 10px;
     width: 49%;
+    cursor: pointer;
+    transition: 0.2s background-color;
+}
+button:hover {
+    background-color: lightgrey;
 }
 .controls {
     display: flex;
     gap: 4px;
 }
 .small {
-    font-size: 12px;
+    font-size: 1rem;
 }
